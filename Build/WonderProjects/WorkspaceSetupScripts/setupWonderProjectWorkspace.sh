@@ -16,14 +16,16 @@ if [ "$WO_VERSION" == "" ]; then
 	exit 1
 fi
 
-echo "           WOnder Version: ${WONDER_GIT_REFERENCE}"
 if [ "$WONDER_GIT_REFERENCE" == "" ]; then
 	if [ "$WO_VERSION" == "5.4.3" ]; then
+		echo "WO_VERSION is 5.4.3"
 		WONDER_GIT_REFERENCE = "master"
 	elif [ "$WO_VERSION" == "5.3.3" ]; then
+		echo "WO_VERSION is 5.3.3"
 		WONDER_GIT_REFERENCE = "Wonder_5_0_0_Legacy"
 	fi
 fi
+echo "           WOnder Version: ${WONDER_GIT_REFERENCE}"
 
 if [ "$PROJECT_BRANCHES_TAGS_TRUNK" == "trunk" ]; then
 	BRANCH_TAG_DELIMITER=""
