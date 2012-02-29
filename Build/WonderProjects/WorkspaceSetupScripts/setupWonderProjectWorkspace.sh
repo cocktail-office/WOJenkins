@@ -19,10 +19,13 @@ fi
 if [ "$WONDER_GIT_REFERENCE" == "" ]; then
 	if [ "$WO_VERSION" == "5.4.3" ]; then
 		echo "WO_VERSION is 5.4.3"
-		WONDER_GIT_REFERENCE = "master"
+		WONDER_GIT_REFERENCE="master"
 	elif [ "$WO_VERSION" == "5.3.3" ]; then
 		echo "WO_VERSION is 5.3.3"
-		WONDER_GIT_REFERENCE = "Wonder_5_0_0_Legacy"
+		WONDER_GIT_REFERENCE="Wonder_5_0_0_Legacy"
+	else 
+		echo "Impossible to determine the WONDER_GIT_REFERENCE."
+		exit 1
 	fi
 fi
 echo "           WOnder Version: ${WONDER_GIT_REFERENCE}"
