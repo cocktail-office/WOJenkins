@@ -9,6 +9,8 @@ echo "WO Version: ${WO_VERSION}"
 if [ "$WO_VERSION" == "" ]; then
 	echo "You must provide a WO_VERSION."
 	exit 1
+elif [ "$WO_VERSION" == "5.3.3" ]; then
+	WO_ALT_VERSION=53
 elif [ "$WO_VERSION" == "5.4.3" ]; then
 	WO_ALT_VERSION=54
 fi
