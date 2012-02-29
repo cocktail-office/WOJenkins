@@ -22,6 +22,7 @@ if [ "$WONDER_GIT_REFERENCE" == "" ]; then
 		WONDER_GIT_REFERENCE = "master"
 	elif [ "$WO_VERSION" == "5.3.3" ]; then
 		WONDER_GIT_REFERENCE = "Wonder_5_0_0_Legacy"
+	fi
 fi
 
 if [ "$PROJECT_BRANCHES_TAGS_TRUNK" == "trunk" ]; then
