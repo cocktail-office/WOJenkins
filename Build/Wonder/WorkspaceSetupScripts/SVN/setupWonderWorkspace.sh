@@ -4,32 +4,22 @@ WOPROJECT=woproject.jar
 JOB_ROOT=${WORKSPACE}/../..
 FRAMEWORKS_REPOSITORY=${HUDSON_HOME}/WOFrameworksRepository
 
-echo "WO Version: ${WO_VERSION}"
-echo "WOnder Revision: ${WONDER_REVISION}"
-
-if [ "$WO_VERSION" == "" ]; then
-	echo "You must provide a WO_VERSION."
-	exit 1
-elif [ "$WO_VERSION" == "5.4.3" ]; then
-	WO_ALT_VERSION=54
-fi
-
-if [ "$WONDER_BRANCH" == "trunk" ]; then
-	WONDER_BRANCH_DIRECTORY = ${WONDER_BRANCH}
-else
-	WONDER_BRANCH_DIRECTORY=${WONDER_BRANCH//branches/};
-fi
-echo "WOnder Branch Directory: ${WONDER_BRANCH_DIRECTORY}"
-
-if [ "$WONDER_REVISION" == "" ]; then
-	WONDER_REVISION_DIRECTORY="Head"
-else
-	WONDER_REVISION_DIRECTORY=${WONDER_REVISION//@/};
-fi
-echo "WOnder Revision Directory: ${WONDER_REVISION_DIRECTORY}"
-
-WONDER_SUB_PATH=${WONDER_BRANCH}/${WONDER_REVISION_DIRECTORY}
+WONDER_SUB_PATH=${WONDER_BRANCH}
 echo "WOnder Revision Directory: ${WONDER_SUB_PATH}"
+
+if [ "$WONDER_SUB_PATH" == "" ]; then
+	echo "You must provide a WONDER_BRANCH."
+	exit 1
+elif [ "$WONDER_SUB_PATH" == "Wonder_5_0_0_Legacy" ]; then
+	WO_ALT_VERSION=53
+	WO_VERSION=5.3.3
+else 
+	WO_ALT_VERSION=54
+	WO_VERSION=5.4.3
+fi
+
+echo "WO Version: ${WO_VERSION}"
+
 
 #
 # Configure the launch environment based on the platform information.
@@ -109,14 +99,14 @@ else
 fi
 
 # Setup and link to Wonder frameworks repository directory
-echo "Look for: ${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/${WO_VERSION}${LOCAL_PATH_PREFIX}/Library"
-if [ -e "${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/${WO_VERSION}${LOCAL_PATH_PREFIX}/Library" ]; then
+echo "Look for: ${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/Library"
+if [ -e "${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/Library" ]; then
 	echo "This version of Wonder has already been built. Skip creating it."
 else
-	mkdir -p ${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/${WO_VERSION}${LOCAL_PATH_PREFIX}/Library
+	mkdir -p ${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/Library
 fi
-echo "ln -sfn ${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/${WO_VERSION}${LOCAL_PATH_PREFIX}/Library ${ROOT}${LOCAL_PATH_PREFIX}"
-(ln -sfn ${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/${WO_VERSION}${LOCAL_PATH_PREFIX}/Library ${ROOT}${LOCAL_PATH_PREFIX})
+echo "ln -sfn ${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/Library ${ROOT}${LOCAL_PATH_PREFIX}"
+(ln -sfn ${FRAMEWORKS_REPOSITORY}/ProjectWOnder/${WONDER_SUB_PATH}/Library ${ROOT}${LOCAL_PATH_PREFIX})
 
 # Link to the woproject.jar so Ant can use it for building
 mkdir -p ${ROOT}/lib

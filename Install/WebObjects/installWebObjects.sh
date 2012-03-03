@@ -2,6 +2,18 @@
 FRAMEWORKS_REPOSITORY=${HUDSON_HOME}/WOFrameworksRepository
 
 echo "Repository: ${FRAMEWORKS_REPOSITORY}"
+WONDER_SUB_PATH=${WONDER_BRANCH}
+echo "WOnder Revision Directory: ${WONDER_SUB_PATH}"
+
+if [ "$WONDER_SUB_PATH" == "" ]; then
+	echo "You must provide a WONDER_BRANCH."
+	exit 1
+elif [ "$WONDER_SUB_PATH" == "Wonder_5_0_0_Legacy" ]; then
+	WO_VERSION=5.3.3
+else
+	WO_VERSION=5.4.3
+fi
+
 echo "WO Version: ${WO_VERSION}"
 
 if [ "${FRAMEWORKS_REPOSITORY}" == "" ]; then
