@@ -1,7 +1,7 @@
 #!/bin/bash
 ROOT=$WORKSPACE/Root
 WOPROJECT=woproject.jar
-JOB_ROOT=${WORKSPACE}/../..
+JOB_ROOT=${JENKINS_HOME}/jobs
 FRAMEWORKS_REPOSITORY=${JENKINS_HOME}/WOFrameworksRepository
 
 echo "             Project Name: ${PROJECT_NAME}"
